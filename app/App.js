@@ -1,9 +1,5 @@
-import { View, Text } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>FitLevel funcionando</Text>
-    </View>
-  );
+  return <HomeScreen />;
 }
