@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 export default function AvatarItem({ avatar, name, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={{ uri: avatar }} style={styles.image} />
+      <Image source={avatar} style={styles.image} />
       <Text style={styles.name} numberOfLines={2}>
         {name}
       </Text>
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     height: 58,
     borderRadius: 29,
     marginBottom: 8,
+    resizeMode: 'cover',
   },
   name: {
     textAlign: 'center',

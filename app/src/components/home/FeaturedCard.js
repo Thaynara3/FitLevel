@@ -3,9 +3,10 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 export default function FeaturedCard({ image, title }) {
   return (
     <ImageBackground
-      source={{ uri: image }}
+      source={image}
       style={styles.container}
       imageStyle={styles.image}
+      resizeMode="cover"
     >
       <View style={styles.overlay}>
         <Text style={styles.title}>{title}</Text>

@@ -1,12 +1,26 @@
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import FeaturedCard from '../components/home/FeaturedCard';
 import AvatarItem from '../components/home/AvatarItem';
 import CharacterCard from '../components/home/CharacterCard';
-import { featuredCharacter, popularCharacters } from '../data/characters';
+
+import {
+  featuredCharacter,
+  listCharacters,
+  popularCharacters,
+} from '../data/characters';
 
 export default function HomeScreen() {
+
   function renderAvatarItem({ item }) {
     return (
       <AvatarItem
@@ -30,27 +44,42 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.screen}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+
+        {/* HEADER */}
         <View style={styles.header}>
           <Ionicons name="menu-outline" size={24} color="#111" />
-          <Text style={styles.headerTitle}>FitLevel</Text>
+
+          <Text style={styles.headerTitle}>
+            FitLevel
+          </Text>
+
           <View style={styles.profileCircle} />
         </View>
 
+        {/* BANNER PRINCIPAL */}
         <FeaturedCard
           image={featuredCharacter.image}
           title={featuredCharacter.title}
         />
 
+        {/* LISTA */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Lista</Text>
+          <Text style={styles.sectionTitle}>
+            Lista
+          </Text>
+
           <TouchableOpacity style={styles.seeMore}>
             <Text style={styles.seeMoreText}>›</Text>
           </TouchableOpacity>
         </View>
 
         <FlatList
-          data={popularCharacters}
+          data={listCharacters}
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -58,8 +87,12 @@ export default function HomeScreen() {
           contentContainerStyle={styles.horizontalList}
         />
 
+        {/* POPULAR */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Popular</Text>
+          <Text style={styles.sectionTitle}>
+            Popular
+          </Text>
+
           <TouchableOpacity style={styles.seeMore}>
             <Text style={styles.seeMoreText}>›</Text>
           </TouchableOpacity>
@@ -73,13 +106,18 @@ export default function HomeScreen() {
           renderItem={renderCharacterCard}
           contentContainerStyle={styles.horizontalList}
         />
+
       </ScrollView>
 
+      {/* BARRA INFERIOR */}
       <View style={styles.bottomNav}>
         <Ionicons name="home" size={22} color="#111" />
+
         <Ionicons name="search-outline" size={22} color="#777" />
+
         <Ionicons name="pulse-outline" size={22} color="#777" />
       </View>
+
     </View>
   );
 }
@@ -89,28 +127,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+
   content: {
     paddingTop: 56,
     paddingHorizontal: 16,
     paddingBottom: 100,
   },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
   },
+
   headerTitle: {
     fontSize: 20,
     fontWeight: '700',
     color: '#111',
   },
+
   profileCircle: {
     width: 28,
     height: 28,
     borderRadius: 14,
     backgroundColor: '#d9d9d9',
   },
+
   sectionHeader: {
     marginTop: 18,
     marginBottom: 10,
@@ -118,25 +161,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
     color: '#111',
   },
+
   seeMore: {
     width: 24,
     height: 24,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   seeMoreText: {
     fontSize: 24,
     color: '#333',
     lineHeight: 24,
   },
+
   horizontalList: {
     paddingRight: 4,
   },
+
   bottomNav: {
     position: 'absolute',
     bottom: 0,
