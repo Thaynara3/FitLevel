@@ -1,3 +1,5 @@
+//IMAGENS DOS PERSONAGENS AQUI
+
 export const featuredCharacter = {
   id: 'f1',
   name: 'Pingu',
@@ -10,8 +12,39 @@ export const listCharacters = [
     id: '1',
     name: 'Oliver Queen',
     title: 'Alta Precisão',
+    focus: 'Alta Precisão',
+    level: 'Iniciante e Intermediário',
+    frequency: '5×2',
+    description:
+      'A rotina envolve treino funcional, resistência, mobilidade e exercícios de precisão para melhorar força, controle corporal e foco.',
     avatar: require('../../assets/images/characters/oliver.jpg'),
     image: require('../../assets/images/characters/oliver.jpg'),
+
+    workouts: [
+      {
+        id: '1',
+        name: 'Aquecimento',
+        description: 'Alongamentos dinâmicos, mobilidade de ombros e ativação do core.',
+        series: '-',
+        videoUrl: 'https://www.youtube.com/watch?v=2L2lnxIcNmo',
+      },
+
+      {
+        id: '2',
+        name: 'Treino de Força',
+        description: 'Flexões, agachamentos, prancha e remada com elástico.',
+        series: '3 ~ 4',
+        videoUrl: 'https://www.youtube.com/watch?v=IODxDxX7oi4',
+      },
+
+      {
+        id: '3',
+        name: 'Treino de Precisão',
+        description: 'Exercícios de equilíbrio, coordenação, postura e controle de respiração.',
+        series: '5',
+        videoUrl: 'https://www.youtube.com/watch?v=UItWltVZZmE',
+      },
+    ],
   },
 
   {

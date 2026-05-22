@@ -1,11 +1,11 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function CharacterCard({ image, name, title, onPress }) {
+export default function CharacterCard({ image, name, title, label = "Personagem" , onPress }) {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image source={image} style={styles.image} />
       <View style={styles.info}>
-        <Text style={styles.label}>Personagem Destaque</Text>
+        <Text style={styles.label}>{label}</Text>
         <Text style={styles.characterName}>{name}</Text>
         <Text style={styles.title}>{title}</Text>
       </View>

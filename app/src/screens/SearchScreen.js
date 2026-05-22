@@ -35,9 +35,9 @@ export default function SearchScreen({ navigation }) {
           <TouchableOpacity
             key={item.id}
             style={styles.resultRow}
-            onPress={() => navigation.navigate('Character', { character: item })}
+            onPress={() => navigation.navigate('CharacterScreen', { character: item })}
           >
-            <Image source={{ uri: item.avatar }} style={styles.avatar} />
+            <Image source={item.avatar} style={styles.avatar} />
             <View style={styles.resultInfo}>
               <Text style={styles.resultName}>{item.name}</Text>
               <Text style={styles.resultTitle}>{item.title}</Text>
@@ -51,14 +51,16 @@ export default function SearchScreen({ navigation }) {
       </ScrollView>
 
       <View style={styles.bottomNav}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Ionicons name="home-outline" size={22} color="#777" />
+        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+          <Ionicons name="home-outline" size={24} color="#777" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-          <Ionicons name="search" size={22} color="#111" />
+
+        <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+          <Ionicons name="search" size={24} color="#111" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('IMC')}>
-          <Ionicons name="pulse-outline" size={22} color="#777" />
+
+        <TouchableOpacity onPress={() => navigation.navigate('IMCScreen')}>
+          <Ionicons name="pulse-outline" size={24} color="#777" />
         </TouchableOpacity>
       </View>
     </View>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: { marginRight: 8 },
   input: { flex: 1, fontSize: 15, color: '#111' },
-  results: { paddingHorizontal: 16, paddingBottom: 100 },
+  results: { paddingHorizontal: 16, paddingBottom: 120 },
   resultRow: {
     flexDirection: 'row', alignItems: 'center',
     paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: '#eee', gap: 12,
@@ -85,9 +87,20 @@ const styles = StyleSheet.create({
   resultName: { fontSize: 15, fontWeight: '600', color: '#111' },
   resultTitle: { fontSize: 13, color: '#777', marginTop: 2 },
   empty: { textAlign: 'center', color: '#999', marginTop: 40, fontSize: 14 },
+
   bottomNav: {
-    position: 'absolute', bottom: 0, left: 0, right: 0, height: 68,
-    borderTopWidth: 1, borderTopColor: '#eee', backgroundColor: '#fff',
-    flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 82,
+    paddingBottom: 14,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });

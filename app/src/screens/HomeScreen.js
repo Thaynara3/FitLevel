@@ -19,14 +19,14 @@ import {
   popularCharacters,
 } from '../data/characters';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 
   function renderAvatarItem({ item }) {
     return (
       <AvatarItem
         avatar={item.avatar}
         name={item.name}
-        onPress={() => console.log('Abrir personagem:', item.name)}
+        onPress={() => navigation.navigate('CharacterScreen', { character: item })}
       />
     );
   }
@@ -37,7 +37,8 @@ export default function HomeScreen() {
         image={item.image}
         name={item.name}
         title={item.title}
-        onPress={() => console.log('Abrir personagem:', item.name)}
+        label="Popular"
+        onPress={() => navigation.navigate('CharacterScreen', { character: item })}
       />
     );
   }
@@ -111,13 +112,20 @@ export default function HomeScreen() {
 
       {/* BARRA INFERIOR */}
       <View style={styles.bottomNav}>
-        <Ionicons name="home" size={22} color="#111" />
 
-        <Ionicons name="search-outline" size={22} color="#777" />
+        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+          <Ionicons name="home" size={24} color="#111" />
+        </TouchableOpacity>
 
-        <Ionicons name="pulse-outline" size={22} color="#777" />
+        <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+          <Ionicons name="search-outline" size={24} color="#777" />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('IMCScreen')}>
+          <Ionicons name="pulse-outline" size={24} color="#777" />
+        </TouchableOpacity>
+
       </View>
-
     </View>
   );
 }
@@ -131,7 +139,7 @@ const styles = StyleSheet.create({
   content: {
     paddingTop: 56,
     paddingHorizontal: 16,
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
 
   header: {
@@ -190,7 +198,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 68,
+    height: 82,
+    paddingBottom: 14,
+    paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: '#eee',
     backgroundColor: '#fff',

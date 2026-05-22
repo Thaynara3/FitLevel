@@ -18,7 +18,10 @@ export default function IMCScreen({ navigation }) {
   function calculate() {
     const h = parseFloat(height.replace(',', '.'));
     const w = parseFloat(weight.replace(',', '.'));
-    if (!h || !w || h <= 0 || w <= 0) return;
+    if (!h || !w || h <= 0 || w <= 0) {
+      setResult(null);
+      return;
+    }
     const imc = w / (h * h);
     setResult(imc);
   }
@@ -85,14 +88,16 @@ export default function IMCScreen({ navigation }) {
       </ScrollView>
 
       <View style={styles.bottomNav}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Ionicons name="home-outline" size={22} color="#777" />
+        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+          <Ionicons name="home-outline" size={24} color="#777" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-          <Ionicons name="search-outline" size={22} color="#777" />
+
+        <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+          <Ionicons name="search-outline" size={24} color="#777" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('IMC')}>
-          <Ionicons name="pulse" size={22} color="#111" />
+
+        <TouchableOpacity onPress={() => navigation.navigate('IMCScreen')}>
+          <Ionicons name="pulse" size={24} color="#111" />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -105,32 +110,55 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 },
   title: { fontSize: 18, fontWeight: '700', color: '#111' },
   label: { fontSize: 14, fontWeight: '500', color: '#111', marginBottom: 8, marginTop: 16 },
+
   genderRow: { flexDirection: 'row', gap: 24, marginBottom: 4 },
+
   radioOption: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+
   radio: { width: 18, height: 18, borderRadius: 9, borderWidth: 2, borderColor: '#111' },
-  radioSelected: { backgroundColor: '#111' },
+
+  radioSelected: {
+    backgroundColor: '#111',
+    borderWidth: 4,
+    borderColor: '#fff',
+  },
+
   radioLabel: { fontSize: 14, color: '#111' },
+
   input: {
     borderWidth: 1, borderColor: '#ddd', borderRadius: 10,
     paddingHorizontal: 14, paddingVertical: 12,
     fontSize: 15, color: '#111',
   },
+
   button: {
     backgroundColor: '#111', borderRadius: 10,
     paddingVertical: 16, alignItems: 'center', marginTop: 24,
   },
+
   buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
   resultCard: {
     marginTop: 20, borderWidth: 1, borderColor: '#eee',
-    borderRadius: 14, padding: 20, alignItems: 'center',
+    borderRadius: 14, padding: 20, alignItems: 'center', backgroundColor: '#fafafa',
   },
   resultTitle: { fontSize: 14, color: '#777', marginBottom: 8 },
-  resultValue: { fontSize: 48, fontWeight: '700', color: '#111' },
+  resultValue: { fontSize: 54, fontWeight: '700', color: '#111' },
   resultCategory: { fontSize: 18, fontWeight: '600', marginTop: 4 },
   resultNote: { fontSize: 12, color: '#999', textAlign: 'center', marginTop: 12, lineHeight: 18 },
+
   bottomNav: {
-    position: 'absolute', bottom: 0, left: 0, right: 0, height: 68,
-    borderTopWidth: 1, borderTopColor: '#eee', backgroundColor: '#fff',
-    flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 82,
+    paddingBottom: 14,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
