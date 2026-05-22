@@ -19,14 +19,22 @@ import {
   popularCharacters,
 } from '../data/characters';
 
+<<<<<<< HEAD
 export default function HomeScreen({ navigation }) {
+=======
+export default function HomeScreen() {
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
 
   function renderAvatarItem({ item }) {
     return (
       <AvatarItem
         avatar={item.avatar}
         name={item.name}
+<<<<<<< HEAD
         onPress={() => navigation.navigate('CharacterScreen', { character: item })}
+=======
+        onPress={() => console.log('Abrir personagem:', item.name)}
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
       />
     );
   }
@@ -37,8 +45,12 @@ export default function HomeScreen({ navigation }) {
         image={item.image}
         name={item.name}
         title={item.title}
+<<<<<<< HEAD
         label="Popular"
         onPress={() => navigation.navigate('CharacterScreen', { character: item })}
+=======
+        onPress={() => console.log('Abrir personagem:', item.name)}
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
       />
     );
   }
@@ -112,6 +124,7 @@ export default function HomeScreen({ navigation }) {
 
       {/* BARRA INFERIOR */}
       <View style={styles.bottomNav}>
+<<<<<<< HEAD
 
         <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
           <Ionicons name="home" size={24} color="#111" />
@@ -126,6 +139,15 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
 
       </View>
+=======
+        <Ionicons name="home" size={22} color="#111" />
+
+        <Ionicons name="search-outline" size={22} color="#777" />
+
+        <Ionicons name="pulse-outline" size={22} color="#777" />
+      </View>
+
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
     </View>
   );
 }
@@ -139,7 +161,11 @@ const styles = StyleSheet.create({
   content: {
     paddingTop: 56,
     paddingHorizontal: 16,
+<<<<<<< HEAD
     paddingBottom: 120,
+=======
+    paddingBottom: 100,
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
   },
 
   header: {
@@ -198,9 +224,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+<<<<<<< HEAD
     height: 82,
     paddingBottom: 14,
     paddingTop: 10,
+=======
+    height: 68,
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
     borderTopWidth: 1,
     borderTopColor: '#eee',
     backgroundColor: '#fff',

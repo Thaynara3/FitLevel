@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 //IMAGENS DOS PERSONAGENS AQUI
 
+=======
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
 export const featuredCharacter = {
   id: 'f1',
   name: 'Pingu',
@@ -12,6 +15,7 @@ export const listCharacters = [
     id: '1',
     name: 'Oliver Queen',
     title: 'Alta Precisão',
+<<<<<<< HEAD
     focus: 'Alta Precisão',
     level: 'Iniciante e Intermediário',
     frequency: '5×2',
@@ -45,6 +49,10 @@ export const listCharacters = [
         videoUrl: 'https://www.youtube.com/watch?v=UItWltVZZmE',
       },
     ],
+=======
+    avatar: require('../../assets/images/characters/oliver.jpg'),
+    image: require('../../assets/images/characters/oliver.jpg'),
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
   },
 
   {

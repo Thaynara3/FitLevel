@@ -1,11 +1,19 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+<<<<<<< HEAD
 export default function CharacterCard({ image, name, title, label = "Personagem" , onPress }) {
+=======
+export default function CharacterCard({ image, name, title, onPress }) {
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image source={image} style={styles.image} />
       <View style={styles.info}>
+<<<<<<< HEAD
         <Text style={styles.label}>{label}</Text>
+=======
+        <Text style={styles.label}>Personagem Destaque</Text>
+>>>>>>> 9e736af0f86f6c07824dfd8cf64a72f4072fdac7
         <Text style={styles.characterName}>{name}</Text>
         <Text style={styles.title}>{title}</Text>
       </View>
