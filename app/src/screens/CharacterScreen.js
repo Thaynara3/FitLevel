@@ -49,7 +49,7 @@ export default function CharacterScreen({ route, navigation }) {
         <View style={styles.infoCard}>
           <InfoRow label="Foco" value={character.focus || character.title} />
           <InfoRow label="Nível" value={character.level || 'Não informado'} />
-          <InfoRow label="Quantas vezes na semana" value={character.frequency || 'Não informado'} />
+          <InfoRow label="Frequência" value={character.frequency || 'Não informado'} />
           <InfoRow label="Descrição" value={character.description || 'Sem descrição.'} last />
         </View>
 
