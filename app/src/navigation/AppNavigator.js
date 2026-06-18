@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CharacterScreen from '../screens/CharacterScreen';
 import SearchScreen from '../screens/SearchScreen';
 import IMCScreen from '../screens/IMCScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,11 @@ export default function AppNavigator() {
         <Stack.Screen
           name="IMCScreen"
           component={IMCScreen}
+        />
+
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

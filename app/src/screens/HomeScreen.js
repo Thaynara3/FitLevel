@@ -59,7 +59,9 @@ export default function HomeScreen({ navigation }) {
             FitLevel
           </Text>
 
-          <View style={styles.profileCircle} />
+          <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+            <View style={styles.profileCircle} />
+          </TouchableOpacity>
         </View>
 
         {/* BANNER PRINCIPAL */}
