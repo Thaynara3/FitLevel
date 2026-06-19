@@ -1,0 +1,54 @@
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import HomeScreen from '../screens/HomeScreen';
+import CharacterScreen from '../screens/CharacterScreen';
+import SearchScreen from '../screens/SearchScreen';
+import IMCScreen from '../screens/IMCScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import AboutScreen from '../screens/AboutScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+        />
+
+        <Stack.Screen
+          name="CharacterScreen"
+          component={CharacterScreen}
+        />
+
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
+        />
+
+        <Stack.Screen
+          name="IMCScreen"
+          component={IMCScreen}
+        />
+
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+        />
+
+        <Stack.Screen
+          name="AboutScreen"
+          component={AboutScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

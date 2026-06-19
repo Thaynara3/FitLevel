@@ -1,0 +1,96 @@
+{
+  "info": {
+    "_postman_id": "491c8940-0f9b-4a1a-955b-b5e847a2aa69",
+    "name": "FitLevel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54872541",
+    "_collection_link": "https://go.postman.co/collection/54872541-491c8940-0f9b-4a1a-955b-b5e847a2aa69?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Busca Personagens",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/characters",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "characters"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Calcula IMC",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"height\": 1.68,\r\n  \"weight\": 56,\r\n  \"gender\": \"female\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/imc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Histórico de IMC",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/imc-history",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc-history"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Limpa Histórico",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/imc-history",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc-history"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

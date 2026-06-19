@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\assets",
+    "\\app\\assets\\images",
+    "\\app\\src",
+    "\\app\\src\\components",
+    "\\app\\src\\components\\home",
+    "\\app\\src\\navigation",
+    "\\app\\src\\screens"
+  ],
+  "SelectedNode": "\\app\\src\\components\\home\\CharacterCard.js",
+  "PreviewInSolutionExplorer": false
+}
