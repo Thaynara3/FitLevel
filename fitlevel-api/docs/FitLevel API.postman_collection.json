@@ -1,25 +1,56 @@
 {
   "info": {
-    "_postman_id": "c2a1c16a-7176-4689-85fd-0ba13ccd3ec9",
+    "_postman_id": "da9dcf9e-ad26-41a5-beee-02d5c1f11acc",
     "name": "FitLevel API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "54872541",
-    "_collection_link": "https://go.postman.co/collection/54872541-c2a1c16a-7176-4689-85fd-0ba13ccd3ec9?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/54872541-da9dcf9e-ad26-41a5-beee-02d5c1f11acc?source=collection_link"
   },
   "item": [
     {
       "name": "Busca Personagens",
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "GET http://localhost:3000/characters",
+          "protocol": "GET http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "characters"
+          ]
+        }
       },
       "response": []
     },
     {
       "name": "Calcula IMC",
       "request": {
-        "method": "GET",
-        "header": []
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"height\": 1.68,\r\n  \"weight\": 56,\r\n  \"gender\": \"female\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/imc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc"
+          ]
+        }
       },
       "response": []
     },
@@ -27,15 +58,37 @@
       "name": "Histórico de IMC",
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/imc-history",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc-history"
+          ]
+        }
       },
       "response": []
     },
     {
       "name": "Limpa Histórico",
       "request": {
-        "method": "GET",
-        "header": []
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/imc-history",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "imc-history"
+          ]
+        }
       },
       "response": []
     }
