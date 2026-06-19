@@ -7,5 +7,14 @@
     "imc": 19.8,
     "category": "Peso Normal",
     "createdAt": "2026-06-19T02:02:48.082Z"
+  },
+  {
+    "id": "1781836453096",
+    "height": 1.68,
+    "weight": 56,
+    "gender": null,
+    "imc": 19.8,
+    "category": "Peso Normal",
+    "createdAt": "2026-06-19T02:34:13.096Z"
   }
 ]
