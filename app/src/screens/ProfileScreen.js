@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Switch,
@@ -26,6 +27,45 @@ export default function ProfileScreen({ navigation }) {
     }
   }
 
+  async function clearHistory() {
+    Alert.alert(
+      'Apagar histórico',
+      'Deseja realmente apagar todos os cálculos de IMC?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Apagar',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const response = await fetch(`${API_URL}/imc-history`, {
+                method: 'DELETE',
+              });
+
+              if (!response.ok) {
+                console.log('Erro ao apagar histórico.');
+                return;
+              }
+
+              setImcHistory([]);
+            } catch (error) {
+              console.log('Erro ao apagar histórico de IMC:', error);
+            }
+          },
+        },
+      ]
+    );
+  }
+
+  function formatGender(gender) {
+    if (gender === 'male') return 'Homem';
+    if (gender === 'female') return 'Mulher';
+    return 'Não informado';
+  }
+
   useEffect(() => {
     loadImcHistory();
   }, []);
@@ -42,7 +82,9 @@ export default function ProfileScreen({ navigation }) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="chevron-back" size={26} color={theme.text} />
           </TouchableOpacity>
+
           <Text style={s.title}>Meu Perfil</Text>
+
           <View style={{ width: 26 }} />
         </View>
 
@@ -51,41 +93,64 @@ export default function ProfileScreen({ navigation }) {
         </View>
 
         <Text style={s.name}>Usuário FitLevel</Text>
-        <Text style={s.subtitle}>Histórico de IMC e configurações do app</Text>
+
+        <Text style={s.subtitle}>
+          Histórico de IMC e configurações do app
+        </Text>
 
         <View style={s.statsContainer}>
           <View style={s.statCard}>
             <Text style={s.statValue}>{imcHistory.length}</Text>
             <Text style={s.statLabel}>IMCs</Text>
           </View>
+
           <View style={s.statCard}>
             <Text style={s.statValue}>10</Text>
             <Text style={s.statLabel}>Personagens</Text>
           </View>
         </View>
 
-        <Text style={s.sectionTitle}>Histórico de IMC</Text>
+        <View style={s.sectionHeader}>
+          <Text style={s.sectionTitle}>Histórico de IMC</Text>
+
+          {imcHistory.length > 0 && (
+            <TouchableOpacity onPress={clearHistory}>
+              <Ionicons name="trash-outline" size={22} color="#ef4444" />
+            </TouchableOpacity>
+          )}
+        </View>
 
         {imcHistory.length === 0 ? (
           <View style={s.emptyCard}>
             <Text style={s.emptyText}>Nenhum IMC calculado ainda.</Text>
           </View>
         ) : (
-          imcHistory
-            .slice()
-            .reverse()
-            .map((item) => (
-              <View key={item.id} style={s.historyCard}>
-                <View>
-                  <Text style={s.historyValue}>IMC {item.imc}</Text>
-                  <Text style={s.historyCategory}>{item.category}</Text>
+          <>
+            {imcHistory
+              .slice()
+              .reverse()
+              .map((item) => (
+                <View key={item.id} style={s.historyCard}>
+                  <View>
+                    <Text style={s.historyValue}>IMC {item.imc}</Text>
+
+                    <Text style={s.historyCategory}>
+                      {item.category} • {formatGender(item.gender)}
+                    </Text>
+                  </View>
+
+                  <View style={s.historyInfo}>
+                    <Text style={s.historyText}>{item.height}m</Text>
+                    <Text style={s.historyText}>{item.weight}kg</Text>
+                  </View>
                 </View>
-                <View style={s.historyInfo}>
-                  <Text style={s.historyText}>{item.height}m</Text>
-                  <Text style={s.historyText}>{item.weight}kg</Text>
-                </View>
-              </View>
-            ))
+              ))}
+
+            <TouchableOpacity style={s.deleteButton} onPress={clearHistory}>
+              <Ionicons name="trash-outline" size={20} color="#fff" />
+              <Text style={s.deleteButtonText}>Limpar histórico</Text>
+            </TouchableOpacity>
+          </>
         )}
 
         <Text style={s.sectionTitle}>Configurações</Text>
@@ -93,7 +158,9 @@ export default function ProfileScreen({ navigation }) {
         <View style={s.configCard}>
           <View style={s.configRow}>
             <Ionicons name="moon-outline" size={22} color={theme.text} />
+
             <Text style={s.configText}>Tema escuro</Text>
+
             <Switch
               value={isDark}
               onValueChange={toggleTheme}
@@ -103,9 +170,19 @@ export default function ProfileScreen({ navigation }) {
           </View>
 
           <View style={[s.configRow, s.lastRow]}>
-            <Ionicons name="information-circle-outline" size={22} color={theme.text} />
+            <Ionicons
+              name="information-circle-outline"
+              size={22}
+              color={theme.text}
+            />
+
             <Text style={s.configText}>Sobre o FitLevel</Text>
-            <Ionicons name="chevron-forward" size={18} color={theme.textHint} />
+
+            <Ionicons
+              name="chevron-forward"
+              size={18}
+              color={theme.textHint}
+            />
           </View>
         </View>
       </ScrollView>
@@ -115,55 +192,181 @@ export default function ProfileScreen({ navigation }) {
 
 function makeStyles(theme) {
   return StyleSheet.create({
-    screen: { flex: 1, backgroundColor: theme.bg },
-    content: { paddingTop: 56, paddingHorizontal: 20, paddingBottom: 40 },
+    screen: {
+      flex: 1,
+      backgroundColor: theme.bg,
+    },
+
+    content: {
+      paddingTop: 56,
+      paddingHorizontal: 20,
+      paddingBottom: 40,
+    },
+
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
       marginBottom: 32,
     },
-    title: { fontSize: 20, fontWeight: '700', color: theme.text },
+
+    title: {
+      fontSize: 20,
+      fontWeight: '700',
+      color: theme.text,
+    },
+
     avatar: {
-      width: 96, height: 96, borderRadius: 48,
+      width: 96,
+      height: 96,
+      borderRadius: 48,
       backgroundColor: theme.card,
-      alignSelf: 'center', marginBottom: 16,
-      alignItems: 'center', justifyContent: 'center',
+      alignSelf: 'center',
+      marginBottom: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    name: { textAlign: 'center', fontSize: 22, fontWeight: '700', color: theme.text },
-    subtitle: { textAlign: 'center', fontSize: 14, color: theme.textMuted, marginTop: 8 },
+
+    name: {
+      textAlign: 'center',
+      fontSize: 22,
+      fontWeight: '700',
+      color: theme.text,
+    },
+
+    subtitle: {
+      textAlign: 'center',
+      fontSize: 14,
+      color: theme.textMuted,
+      marginTop: 8,
+    },
+
     statsContainer: {
-      flexDirection: 'row', justifyContent: 'space-between', marginTop: 30,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 30,
     },
+
     statCard: {
-      flex: 1, backgroundColor: theme.card,
-      borderRadius: 14, padding: 20, marginHorizontal: 5, alignItems: 'center',
+      flex: 1,
+      backgroundColor: theme.card,
+      borderRadius: 14,
+      padding: 20,
+      marginHorizontal: 5,
+      alignItems: 'center',
     },
-    statValue: { fontSize: 26, fontWeight: '700', color: theme.text },
-    statLabel: { fontSize: 14, color: theme.textMuted, marginTop: 6 },
+
+    statValue: {
+      fontSize: 26,
+      fontWeight: '700',
+      color: theme.text,
+    },
+
+    statLabel: {
+      fontSize: 14,
+      color: theme.textMuted,
+      marginTop: 6,
+    },
+
+    sectionHeader: {
+      marginTop: 30,
+      marginBottom: 12,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+
     sectionTitle: {
-      fontSize: 18, fontWeight: '700', color: theme.text, marginTop: 30, marginBottom: 12,
+      fontSize: 18,
+      fontWeight: '700',
+      color: theme.text,
     },
-    emptyCard: { backgroundColor: theme.card, borderRadius: 14, padding: 18 },
-    emptyText: { fontSize: 14, color: theme.textMuted, textAlign: 'center' },
+
+    emptyCard: {
+      backgroundColor: theme.card,
+      borderRadius: 14,
+      padding: 18,
+    },
+
+    emptyText: {
+      fontSize: 14,
+      color: theme.textMuted,
+      textAlign: 'center',
+    },
+
     historyCard: {
-      backgroundColor: theme.card, borderRadius: 14, padding: 16, marginBottom: 10,
-      flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+      backgroundColor: theme.card,
+      borderRadius: 14,
+      padding: 16,
+      marginBottom: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
     },
-    historyValue: { fontSize: 16, fontWeight: '700', color: theme.text },
-    historyCategory: { fontSize: 13, color: theme.textMuted, marginTop: 4 },
-    historyInfo: { alignItems: 'flex-end' },
-    historyText: { fontSize: 13, color: theme.textSecondary },
+
+    historyValue: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: theme.text,
+    },
+
+    historyCategory: {
+      fontSize: 13,
+      color: theme.textMuted,
+      marginTop: 4,
+    },
+
+    historyInfo: {
+      alignItems: 'flex-end',
+    },
+
+    historyText: {
+      fontSize: 13,
+      color: theme.textSecondary,
+    },
+
+    deleteButton: {
+      marginTop: 12,
+      backgroundColor: '#ef4444',
+      borderRadius: 10,
+      paddingVertical: 12,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 8,
+    },
+
+    deleteButtonText: {
+      color: '#fff',
+      fontWeight: '600',
+      fontSize: 14,
+    },
+
     configCard: {
-      backgroundColor: theme.card, borderRadius: 14,
-      paddingHorizontal: 16, marginBottom: 20,
+      backgroundColor: theme.card,
+      borderRadius: 14,
+      paddingHorizontal: 16,
+      marginBottom: 20,
     },
+
     configRow: {
-      flexDirection: 'row', alignItems: 'center',
-      paddingVertical: 16, gap: 12,
-      borderBottomWidth: 1, borderBottomColor: theme.border,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 16,
+      gap: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.border,
     },
-    lastRow: { borderBottomWidth: 0 },
-    configText: { flex: 1, fontSize: 15, color: theme.text, fontWeight: '500' },
+
+    lastRow: {
+      borderBottomWidth: 0,
+    },
+
+    configText: {
+      flex: 1,
+      fontSize: 15,
+      color: theme.text,
+      fontWeight: '500',
+    },
   });
 }

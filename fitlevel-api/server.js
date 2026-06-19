@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -7,7 +9,20 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-let imcHistory = [];
+const imcHistoryPath = path.join(__dirname, 'data', 'imcHistory.json');
+
+function readImcHistory() {
+  try {
+    const data = fs.readFileSync(imcHistoryPath, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveImcHistory(history) {
+  fs.writeFileSync(imcHistoryPath, JSON.stringify(history, null, 2));
+}
 
 const characters = [
   {
@@ -54,10 +69,12 @@ app.get('/characters/:id', (req, res) => {
 });
 
 app.post('/imc', (req, res) => {
-  const { height, weight } = req.body;
+  const { height, weight, gender } = req.body;
 
   if (!height || !weight) {
-    return res.status(400).json({ error: 'Altura e peso são obrigatórios.' });
+    return res.status(400).json({
+      error: 'Altura e peso são obrigatórios.',
+    });
   }
 
   const imc = weight / (height * height);
@@ -67,18 +84,30 @@ app.post('/imc', (req, res) => {
     id: Date.now().toString(),
     height,
     weight,
+    gender: gender || null,
     imc: Number(imc.toFixed(1)),
     category,
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
   };
 
-  imcHistory.push(result);
+  const history = readImcHistory();
+  history.push(result);
+  saveImcHistory(history);
 
   res.status(201).json(result);
 });
 
 app.get('/imc-history', (req, res) => {
-  res.json(imcHistory);
+  const history = readImcHistory();
+  res.json(history);
+});
+
+app.delete('/imc-history', (req, res) => {
+  saveImcHistory([]);
+
+  res.json({
+    message: 'Histórico apagado com sucesso.',
+  });
 });
 
 app.listen(PORT, () => {
