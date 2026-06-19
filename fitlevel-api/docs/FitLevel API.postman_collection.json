@@ -8,7 +8,7 @@
   },
   "item": [
     {
-      "name": "New Request",
+      "name": "Busca Personagens",
       "request": {
         "method": "GET",
         "header": []
@@ -16,7 +16,7 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "Calcula IMC",
       "request": {
         "method": "GET",
         "header": []
@@ -24,7 +24,7 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "Histórico de IMC",
       "request": {
         "method": "GET",
         "header": []
@@ -32,7 +32,7 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "Limpa Histórico",
       "request": {
         "method": "GET",
         "header": []
