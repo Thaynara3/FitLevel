@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "da9dcf9e-ad26-41a5-beee-02d5c1f11acc",
+    "_postman_id": "491c8940-0f9b-4a1a-955b-b5e847a2aa69",
     "name": "FitLevel API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "54872541",
-    "_collection_link": "https://go.postman.co/collection/54872541-da9dcf9e-ad26-41a5-beee-02d5c1f11acc?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/54872541-491c8940-0f9b-4a1a-955b-b5e847a2aa69?source=collection_link"
   },
   "item": [
     {
@@ -13,8 +13,8 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "GET http://localhost:3000/characters",
-          "protocol": "GET http",
+          "raw": "http://localhost:3000/characters",
+          "protocol": "http",
           "host": [
             "localhost"
           ],
