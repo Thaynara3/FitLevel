@@ -7,6 +7,7 @@ import CharacterScreen from '../screens/CharacterScreen';
 import SearchScreen from '../screens/SearchScreen';
 import IMCScreen from '../screens/IMCScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,11 @@ export default function AppNavigator() {
         <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
+        />
+
+        <Stack.Screen
+          name="AboutScreen"
+          component={AboutScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

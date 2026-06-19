@@ -26,9 +26,9 @@ export default function HomeScreen({ navigation }) {
   const { theme, isDark, toggleTheme } = useTheme();
   const { isFavorite } = useFavorites();
 
-  const favoriteCharacters = [...listCharacters, ...popularCharacters].filter(
-    (c) => isFavorite(c.id)
-  );
+  const allCharacters = [...listCharacters, ...popularCharacters];
+
+  const favoriteCharacters = allCharacters.filter((c) => isFavorite(c.id));
 
   function renderAvatarItem({ item }) {
     return (
@@ -68,13 +68,10 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={s.screen}>
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={s.content}
       >
-
-        {/* HEADER */}
         <View style={s.header}>
           <TouchableOpacity onPress={toggleTheme}>
             <Ionicons
@@ -91,20 +88,30 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* BANNER PRINCIPAL */}
         <FeaturedCard
           image={featuredCharacter.image}
           title={featuredCharacter.title}
         />
 
-        {/* MINHA LISTA (favoritos) */}
+        {/* POPULAR */}
+        <View style={s.sectionHeader}>
+          <Text style={s.sectionTitle}>Popular</Text>
+        </View>
+
+        <FlatList
+          data={popularCharacters}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={renderCharacterCard}
+          contentContainerStyle={s.horizontalList}
+        />
+
+        {/* MINHA LISTA */}
         {favoriteCharacters.length > 0 && (
           <>
             <View style={s.sectionHeader}>
-              <Text style={s.sectionTitle}>Minha Lista</Text>
-              <TouchableOpacity style={s.seeMore}>
-                <Text style={s.seeMoreText}>›</Text>
-              </TouchableOpacity>
+              <Text style={s.sectionTitle}>Meus Favoritos</Text>
             </View>
 
             <FlatList
@@ -118,45 +125,22 @@ export default function HomeScreen({ navigation }) {
           </>
         )}
 
-        {/* LISTA */}
+        {/* LISTA COMPLETA */}
         <View style={s.sectionHeader}>
           <Text style={s.sectionTitle}>Lista</Text>
-          <TouchableOpacity style={s.seeMore}>
-            <Text style={s.seeMoreText}>›</Text>
-          </TouchableOpacity>
         </View>
 
         <FlatList
-          data={listCharacters}
+          data={allCharacters}
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={renderAvatarItem}
           contentContainerStyle={s.horizontalList}
         />
-
-        {/* POPULAR */}
-        <View style={s.sectionHeader}>
-          <Text style={s.sectionTitle}>Popular</Text>
-          <TouchableOpacity style={s.seeMore}>
-            <Text style={s.seeMoreText}>›</Text>
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          data={popularCharacters}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderCharacterCard}
-          contentContainerStyle={s.horizontalList}
-        />
-
       </ScrollView>
 
-      {/* BARRA INFERIOR */}
       <View style={s.bottomNav}>
-
         <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
           <Ionicons name="home" size={24} color={theme.iconActive} />
         </TouchableOpacity>
@@ -168,7 +152,6 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate('IMCScreen')}>
           <Ionicons name="pulse-outline" size={24} color={theme.iconInactive} />
         </TouchableOpacity>
-
       </View>
     </View>
   );
@@ -180,28 +163,33 @@ function makeStyles(theme) {
       flex: 1,
       backgroundColor: theme.bg,
     },
+
     content: {
       paddingTop: 56,
       paddingHorizontal: 16,
       paddingBottom: 120,
     },
+
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
       marginBottom: 20,
     },
+
     headerTitle: {
       fontSize: 20,
       fontWeight: '700',
       color: theme.text,
     },
+
     profileCircle: {
       width: 28,
       height: 28,
       borderRadius: 14,
       backgroundColor: theme.bgTertiary,
     },
+
     sectionHeader: {
       marginTop: 18,
       marginBottom: 10,
@@ -209,25 +197,17 @@ function makeStyles(theme) {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
+
     sectionTitle: {
       fontSize: 20,
       fontWeight: '700',
       color: theme.text,
     },
-    seeMore: {
-      width: 24,
-      height: 24,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    seeMoreText: {
-      fontSize: 24,
-      color: theme.textSecondary,
-      lineHeight: 24,
-    },
+
     horizontalList: {
       paddingRight: 4,
     },
+
     bottomNav: {
       position: 'absolute',
       bottom: 0,

@@ -112,12 +112,6 @@ export default function ProfileScreen({ navigation }) {
 
         <View style={s.sectionHeader}>
           <Text style={s.sectionTitle}>Histórico de IMC</Text>
-
-          {imcHistory.length > 0 && (
-            <TouchableOpacity onPress={clearHistory}>
-              <Ionicons name="trash-outline" size={22} color="#ef4444" />
-            </TouchableOpacity>
-          )}
         </View>
 
         {imcHistory.length === 0 ? (
@@ -169,7 +163,10 @@ export default function ProfileScreen({ navigation }) {
             />
           </View>
 
-          <View style={[s.configRow, s.lastRow]}>
+          <TouchableOpacity
+            style={[s.configRow, s.lastRow]}
+            onPress={() => navigation.navigate('AboutScreen')}
+          >
             <Ionicons
               name="information-circle-outline"
               size={22}
@@ -183,7 +180,7 @@ export default function ProfileScreen({ navigation }) {
               size={18}
               color={theme.textHint}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

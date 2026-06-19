@@ -17,7 +17,7 @@ export const listCharacters = [
     frequency: '5x por semana / 2 dias de descanso',
     description:
       'Rotina com treino funcional, resistência, mobilidade e exercícios de precisão para melhorar força, controle corporal e foco.',
-    avatar: require('../../assets/images/characters/oliver.jpg'),
+    avatar: require('../../assets/images/characters/oliver-icon.jpg'),
     image: require('../../assets/images/characters/oliver.jpg'),
 
     workouts: [
@@ -252,7 +252,7 @@ export const popularCharacters = [
     frequency: '5x por semana / 2 dias de descanso',
     description:
       'Rotina baseada no peso corporal e em exercícios pliométricos para desenvolver força, agilidade e controle dos movimentos.',
-    avatar: require('../../assets/images/characters/maki.jpg'),
+    avatar: require('../../assets/images/characters/maki-icon.jpg'),
     image: require('../../assets/images/characters/maki.jpg'),
 
     workouts: [
