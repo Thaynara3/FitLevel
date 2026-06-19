@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
-const API_URL = 'http://192.168.15.138:3000';
+const API_URL = 'http://10.0.2.2:3000';
 
 function getIMCCategory(imc) {
   if (imc < 18.5) return { label: 'Abaixo do Peso', color: '#3b82f6' };

@@ -1,20 +1,11 @@
 [
   {
-    "id": "1781834568082",
+    "id": "1781872820545",
     "height": 1.68,
     "weight": 56,
     "gender": "female",
     "imc": 19.8,
     "category": "Peso Normal",
-    "createdAt": "2026-06-19T02:02:48.082Z"
-  },
-  {
-    "id": "1781836453096",
-    "height": 1.68,
-    "weight": 56,
-    "gender": null,
-    "imc": 19.8,
-    "category": "Peso Normal",
-    "createdAt": "2026-06-19T02:34:13.096Z"
+    "createdAt": "2026-06-19T12:40:20.545Z"
   }
 ]
